@@ -1,55 +1,11 @@
-/*
- * Fragment Block
- * Include content on a page as a fragment.
- * https://www.aem.live/developer/block-collection/fragment
- */
+import{decorateMain}from"../../scripts/scripts.js";
+import{loadBlocks}from"../../scripts/aem.js";
 
-import {
-  decorateMain,
-} from '../../scripts/scripts.js';
+export async function loadFragment(t){if(t&&t.startsWith("/")){
+    const e=await fetch(`${t}.plain.html`);
+    if(e.ok){const o=document.createElement("main");o.innerHTML=await e.text();const r=(e,r)=>{o.querySelectorAll(`${e}[${r}^="./media_"]`).forEach((e=>{e[r]=new URL(e.getAttribute(r),new URL(t,window.location)).href}))};
+    return r("img","src"),r("source","srcset"),decorateMain(o),await loadBlocks(o),o}}
+    return null}
 
-import {
-  loadBlocks,
-} from '../../scripts/aem.js';
-
-/**
- * Loads a fragment.
- * @param {string} path The path to the fragment
- * @returns {HTMLElement} The root element of the fragment
- */
-export async function loadFragment(path) {
-  if (path && path.startsWith('/')) {
-    const resp = await fetch(`${path}.plain.html`);
-    if (resp.ok) {
-      const main = document.createElement('main');
-      main.innerHTML = await resp.text();
-
-      // reset base path for media to fragment base
-      const resetAttributeBase = (tag, attr) => {
-        main.querySelectorAll(`${tag}[${attr}^="./media_"]`).forEach((elem) => {
-          elem[attr] = new URL(elem.getAttribute(attr), new URL(path, window.location)).href;
-        });
-      };
-      resetAttributeBase('img', 'src');
-      resetAttributeBase('source', 'srcset');
-
-      decorateMain(main);
-      await loadBlocks(main);
-      return main;
-    }
-  }
-  return null;
-}
-
-export default async function decorate(block) {
-  const link = block.querySelector('a');
-  const path = link ? link.getAttribute('href') : block.textContent.trim();
-  const fragment = await loadFragment(path);
-  if (fragment) {
-    const fragmentSection = fragment.querySelector(':scope .section');
-    if (fragmentSection) {
-      block.closest('.section').classList.add(...fragmentSection.classList);
-      block.closest('.fragment').replaceWith(...fragment.childNodes);
-    }
-  }
-}
+export default async function decorate(t){const e=t.querySelector("a"),o=e?e.getAttribute("href"):t.textContent.trim(),r=await loadFragment(o);
+if(r){const e=r.querySelector(":scope .section");e&&(t.closest(".section").classList.add(...e.classList),t.closest(".fragment").replaceWith(...r.childNodes))}}

@@ -3,25 +3,52 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   grid-gap: 16px;
 }
 
 .cards > ul > li {
   border: 1px solid var(--dark-color);
-  background-color: var(--background-color)
+  background-color: var(--background-color);
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: 0px;
 }
 
 .cards .cards-card-image {
   line-height: 0;
+  background-color: aqua;
 }
 
+/*
 .cards .cards-card-body > *:first-child {
+  padding: .5rem 1rem;
   margin-top: 0;
+  background-color: rgba(0,0,0,0.03);
+  height:40px;
+  align-items: auto;
+  border-bottom: 1px solid rgba(0,0,0,0.125);
+}
+*/
+
+.cards-wrapper {
+  display: table;
+  width: 100%;
+}
+
+.cards-card-body {
+  display: table-row;
+}
+
+.cards-card-body p {
+  padding: 0.5rem 1rem; /* Padding for all paragraphs */
+  margin: 0;
+}
+
+.cards-card-body p:first-child {
+  background-color: rgba(0, 0, 0, 0.03); /* Background color for the first paragraph */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Border for the first paragraph */
 }
 
 .cards > ul > li img {

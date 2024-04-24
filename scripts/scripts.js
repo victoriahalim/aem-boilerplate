@@ -13,7 +13,7 @@ import {
   loadCSS,
 } from './aem.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ["carousel"]; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -78,7 +78,10 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
-    decorateMain(main);
+    console.log("START AWAITING")
+    loadHeader(doc.querySelector('header'));
+    console.log("DONE AWAITING")
+    decorateMain(main); // this does the STYLING for index doc
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
@@ -99,13 +102,12 @@ async function loadEager(doc) {
  */
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
-  await loadBlocks(main);
+  await loadBlocks(main); // v: loads blocks in index doc
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);

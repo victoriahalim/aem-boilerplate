@@ -220,7 +220,7 @@ function searchInput(block, config) {
   input.setAttribute('type', 'search');
   input.className = 'search-input';
 
-  const searchPlaceholder = config.placeholders.searchPlaceholder || 'Search...';
+  const searchPlaceholder = config.placeholders.searchPlaceholder || 'Search';
   input.placeholder = searchPlaceholder;
   input.setAttribute('aria-label', searchPlaceholder);
 
@@ -258,6 +258,9 @@ export default async function decorate(block) {
     searchBox(block, { source, placeholders }),
     searchResultsContainer(block),
   );
+
+  // search results container shouldn't be displayed initially
+  const searchResults = block.querySelector('.search-results');
 
   if (searchParams.get('q')) {
     const input = block.querySelector('input');

@@ -96,6 +96,13 @@ async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
   return crumbs;
 }
 
+function toggleSearchBar(nav) {
+  const sections = nav.querySelectorAll('.section');
+  sections.forEach(section => {
+    section.classList.toggle('hidden');
+  });
+}
+
 async function buildBreadcrumbs() {
   const breadcrumbs = document.createElement('nav');
   breadcrumbs.className = 'breadcrumbs';
@@ -139,6 +146,11 @@ export default async function decorate(block) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
   }
+
+  // Initialize hidden search container
+  const searchContainer = nav.querySelector('.search-container');
+  searchContainer.classList.add('hidden');
+
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
@@ -167,6 +179,11 @@ export default async function decorate(block) {
   nav.setAttribute('aria-expanded', 'false');
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+
+  // Search bar functionality
+  const searchIcon = nav.querySelector('.nav-tools .icon-search');
+  searchIcon.addEventListener('click', () => toggleSearchBar(nav, searchContainer));
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);

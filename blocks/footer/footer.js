@@ -1,6 +1,22 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
+function hoverEffect(socialIcons) {
+  socialIcons.forEach(img => {
+    const defaultImgSrc = img.getAttribute('src');
+    const hoverImgSrc = defaultImgSrc.slice(0, -4) + "-hover.svg";
+    console.log(hoverImgSrc)
+
+    img.addEventListener('mouseenter', () => {
+        img.src = hoverImgSrc
+    });
+
+    img.addEventListener('mouseleave', () => {
+        img.src = defaultImgSrc;
+    });
+  });
+}
+
 export default async function decorate(block) {
   const footerMeta = getMetadata('footer');
   block.textContent = '';
@@ -9,4 +25,10 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
   block.append(footer);
+
+  // social icons mouse hover effect
+  const socialIcons = footer.querySelectorAll('[data-social-icons="true"] img');
+  hoverEffect(socialIcons)
+
+  console.log(socialIcons);
 }

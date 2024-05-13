@@ -17,7 +17,8 @@
   --background-color: white;
   --light-color: #eee;
   --dark-color: #ccc;
-  --text-color: black;
+  --text-color: #181a20;
+  --body-text-color: #484a50;
   --bs-btn-bg: #208834;
   --bs-body-color: white;
 
@@ -27,21 +28,24 @@
   --fixed-font-family: 'Inter';
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 18px;
-  --body-font-size-xs: 16px;
+  --body-font-size-l: 18px;
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
+  --body-font-size-xxs: 11px;
 
-  /* heading sizes */
-  --heading-font-size-xxl: 40px;
-  --heading-font-size-xl: 36px;
-  --heading-font-size-l: 28px;
-  --heading-font-size-m: 16px;
-  --heading-font-size-s: 14px;
-  --heading-font-size-xs: 11px;
+  /* heading sizes (default for <= 800px) */
+  --heading-font-size-xxl: 48px;
+  --heading-font-size-xl: 32px;
+  --heading-font-size-l: 24px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
+
+  /* ------ */
 
   /* nav height */
   --nav-height: 64px;
-  
 }
 
 @font-face {
@@ -51,70 +55,45 @@
   src: local('Arial');
 }
 
-@media (width >= 900px) {
-  :root {
-    --heading-font-size-xxl: 48px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 16px;
-    --heading-font-size-s: 14px;
-    --heading-font-size-xs: 11px;
-  }
-}
-
-/* Default font sizes */
+/* --- HEADER FONT SIZING --- */
+/* Default font sizes: for screens <= 800px */
 h1 {
-  font-size: 40px;
+  font-size: var(--heading-font-size-xxl);
+  letter-spacing: -0.8px;
+  line-height: 64px;
 }
 
 h2 {
   font-size: var(--heading-font-size-xl);
+  letter-spacing: -0.48px;
+  line-height: 40px;
 }
 
 h3 {
   font-size: var(--heading-font-size-l);
+  letter-spacing: -0.24px;
+  line-height: 32px;
 }
 
 h4 {
   font-size: var(--heading-font-size-m);
+  letter-spacing: -0.24px;
+  line-height: 28px;
 }
 
 h5 {
   font-size: var(--heading-font-size-s);
+  letter-spacing: -0.24px;
+  line-height: 24px;
 }
 
 h6 {
   font-size: var(--heading-font-size-xs);
+  letter-spacing: -0.24px;
+  line-height: 24px;
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 1474px) and (min-width: 1073px) {
-  h1 {
-    font-size: 35px; /* Estimate for h1 based on the provided values */
-  }
-
-  h2 {
-    font-size: 32.4px;
-  }
-
-  h3 {
-    font-size: var(--heading-font-size-l);
-  }
-
-  h4 {
-    font-size: var(--heading-font-size-m);
-  }
-
-  h5 {
-    font-size: 14.4px;
-  }
-
-  h6 {
-    font-size: 9.9px;
-  }
-}
-
-@media (max-width: 1072px) and (min-width: 801px) {
+@media (min-width: 801px) {
   h1 {
     font-size: 32px; /* Estimate for h1 based on the provided values */
   }
@@ -132,53 +111,65 @@ h6 {
   }
 
   h5 {
-    font-size: 12.8px;
+    font-size: var(--heading-font-size-s);
   }
 
   h6 {
-    font-size: 8.8px;
+    font-size: var(--heading-font-size-xs);
   }
 }
 
-@media (max-width: 800px) {
-  /* Use the same font sizes as default for screens less than 801px wide */
+@media (min-width: 1073px) {
+  h1 {
+    font-size: 60px;
+  }
+
+  h2 {
+    font-size: 36px;
+  }
+
+  h3 {
+    font-size: 28px;
+  }
+
+  h4 {
+    font-size: 22px;
+  }
+
+  h5 {
+    font-size: var(--heading-font-size-s);
+  }
+
+  h6 {
+    font-size: var(--heading-font-size-xs);
+  }
+}
+/* --- --- */
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: var(--heading-font-family);
+  font-weight: 500;
+  color: var(--text-color);
+  margin-top: 1em;
+  margin-bottom: .5em;
+  scroll-margin: calc(var(--nav-height) + 1em);
 }
 
-
 body {
-  /*font-size: var(--body-font-size-m); */
-  margin: 0;
+  font-size: var(--body-font-size-m);
   font-family: var(--body-font-family);
-  line-height: 1.6;
-  color: var(--text-color);
+  font-weight: 300;
+  line-height: 24px;
+  color: var(--body-text-color);
   background-color: var(--background-color);
+  margin: 0;
   display: none;
 }
 
 body.appear {
   display: block;
 }
-
-header {
-  height: var(--nav-height);
-}
-
-h1, h2, h3,
-h4, h5, h6 {
-  font-family: var(--heading-font-family);
-  font-weight: 500;
-  line-height: 1.25;
-  margin-top: 1em;
-  margin-bottom: .5em;
-  scroll-margin: calc(var(--nav-height) + 1em);
-}
-
-/*h1 { font-size: var(--heading-font-size-xxl) }
-h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
-h4 { font-size: var(--heading-font-size-m) }
-h5 { font-size: var(--heading-font-size-s) }
-h6 { font-size: var(--heading-font-size-xs) }*/
 
 p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
@@ -204,6 +195,10 @@ main pre {
   border-radius: .25em;
   overflow-x: auto;
   white-space: pre;
+}
+
+header {
+  height: var(--nav-height);
 }
 
 /* links */

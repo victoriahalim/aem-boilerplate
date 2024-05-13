@@ -146,6 +146,44 @@ h6 {
 }
 /* --- --- */
 
+/* special body font classes */
+
+.subtitle {
+  font-size: var(--body-font-size-l);
+  font-weight: 400;
+  color: var(--text-color);
+  letter-spacing: -0.24px;
+  line-height: 28px;
+}
+
+.body-small {
+  font-size: var(--body-font-size-s);
+  letter-spacing: -0.24px;
+  line-height: 20px;
+}
+
+.caption {
+  font-weight: 500;
+  font-size: var(--body-font-size-xs);
+  line-height: 16px;
+}
+
+.overline {
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: 1px;
+  line-height: 20px;
+}
+
+.action {
+  font-weight: 600;
+  color: var(--text-color);
+  letter-spacing: -0.12px;
+  line-height: 20px;
+}
+
+/* --- --- */
+
 h1, h2, h3,
 h4, h5, h6 {
   font-family: var(--heading-font-family);

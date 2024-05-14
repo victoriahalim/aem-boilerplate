@@ -78,9 +78,7 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
-    console.log("START AWAITING")
     loadHeader(doc.querySelector('header'));
-    console.log("DONE AWAITING")
     decorateMain(main); // this does the STYLING for index doc
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);

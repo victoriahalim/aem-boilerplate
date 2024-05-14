@@ -13,7 +13,7 @@
 :root {
   /* colors */
   
-  --link-hover-color: #136ff6;
+  --link-hover-color: #208834;
   --background-color: white;
   --light-color: #eee;
   --dark-color: #ccc;
@@ -45,7 +45,7 @@
   /* ------ */
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 94px;
 }
 
 @font-face {
@@ -150,7 +150,7 @@ h6 {
 
 .subtitle {
   font-size: var(--body-font-size-l);
-  font-weight: 400;
+  font-weight: 500;
   color: var(--text-color);
   letter-spacing: -0.24px;
   line-height: 28px;
@@ -163,7 +163,7 @@ h6 {
 }
 
 .caption {
-  font-weight: 500;
+  font-weight: 400; 
   font-size: var(--body-font-size-xs);
   line-height: 16px;
 }
@@ -187,7 +187,7 @@ h6 {
 h1, h2, h3,
 h4, h5, h6 {
   font-family: var(--heading-font-family);
-  font-weight: 500;
+  font-weight: 400; 
   color: var(--text-color);
   margin-top: 1em;
   margin-bottom: .5em;

@@ -147,10 +147,14 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
+  // Add classes for font styling
+  nav.classList.add('action');
+
   // Initialize hidden search container
   const searchContainer = nav.querySelector('.search-container');
   searchContainer.classList.add('hidden');
 
+  // Nav section dropdowns
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
@@ -169,6 +173,21 @@ export default async function decorate(block) {
       });
     });
   }
+
+  // Nav section lists
+  /*function wrapTextWithSpan(listItem) {
+    var text = listItem.textContent;
+    console.log(text);
+    var span = document.createElement('span');
+    span.textContent = text;
+    listItem.textContent = '';
+    listItem.appendChild(span);
+  }
+  
+  const navSectionList = navSections.querySelectorAll('.nav-drop');
+  navSectionList.forEach(wrapTextWithSpan); */  
+
+  // Hamburger
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">

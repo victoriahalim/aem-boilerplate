@@ -1,3 +1,49 @@
+/* custom */
+.carousel .carousel-slide .carousel-slide-content .overline {
+  margin: 0;
+}
+
+.carousel .carousel-slide .carousel-slide-content p.button-container {
+  margin: 40px 0px 10px 0;
+}
+
+.section.carousel-container {
+  padding: 0;
+  margin: 0;
+}
+
+.section.carousel-container > div {
+  max-width: none;
+}
+
+/* fonts */
+.carousel .carousel-slide .carousel-slide-content h2 {
+  color: white;
+  font-size: var(--heading-font-size-xxl);
+  letter-spacing: -0.8px;
+  line-height: 64px;
+  margin: 8px 0 30px 0;
+}
+
+@media (min-width: 801px) {
+  .carousel .carousel-slide .carousel-slide-content h2 {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 1073px) {
+  .carousel .carousel-slide .carousel-slide-content h2 {
+    font-size: 60px;
+  }
+}
+
+.carousel .carousel-slide .carousel-slide-content p {
+  color: white;
+}
+
+
+/* -- */
+
 .carousel .carousel-slides-container {
     position: relative;
   }
@@ -170,12 +216,12 @@
 
     .carousel .carousel-slide .carousel-slide-content {
       position: absolute;
-      padding: 10% 5%;
+      padding: 10% 7.5%;
       top: 0;
       bottom: 0;
       right: 0;
-      width: 40%; /* Make the overlay cover half of the container */
-      background-color: rgba(0, 0, 0);
+      width: 47.5%; /* Make the overlay cover half of the container */
+      background-color: var(--text-color);
       z-index: 1; /* Ensure overlay appears above the image */
     }
 
@@ -183,7 +229,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      width: 50%; /* Adjust the width of the image as needed */
+      width: 42.5%; /* Adjust the width of the image as needed */
       height: 100%; /* Maintain aspect ratio */
       object-fit: cover; /* Maintain aspect ratio while covering the container */
     }

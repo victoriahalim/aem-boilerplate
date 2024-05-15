@@ -135,4 +135,10 @@ export default async function decorate(block) {
   if (!isSingleSlide) {
     bindEvents(block);
   }
+
+  // Add classes for styling
+  const slideContents = document.querySelectorAll(".carousel-slide-content");
+  slideContents.forEach((slide) => {
+    slide.firstElementChild.classList.add("overline");
+  });
 }

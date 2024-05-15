@@ -15,6 +15,16 @@ import {
 
 const LCP_BLOCKS = ["carousel"]; // add your LCP blocks to the list
 
+/*
+ * Adds classes to a target element
+ */
+export function addClasses(targetContainer, targetElements, newClass) {
+  const targets = targetContainer.querySelectorAll(targetElements);
+  targets.forEach(target => {
+    target.classList.add(newClass);
+  });
+}
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element

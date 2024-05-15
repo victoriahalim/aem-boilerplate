@@ -20,6 +20,7 @@
   --text-color: #181a20;
   --body-text-color: #484a50;
   --bs-btn-bg: #208834;
+  --bs-btn-hover: #0C7420;
   --bs-body-color: white;
 
   /* fonts */
@@ -268,6 +269,7 @@ a.button:any-link, button {
       --bs-btn-disabled-opacity: 1;
       --bs-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-btn-focus-shadow-rgb),.5);
       display: inline-flex;
+      gap: 6px; /* distance between items in button */
       justify-content: center;
       align-items: center;
       letter-spacing: -0.12px;
@@ -288,9 +290,13 @@ a.button:any-link, button {
       transition: color 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 }
 
-a.button:hover, a.button:focus, button:hover, button:focus  {
+a.button:focus, button:focus  {
   background-color: var(--link-hover-color);
   cursor: pointer;
+}
+
+a.button:hover, button:hover {
+  background-color: var(--bs-btn-hover);
 }
 
 button:disabled, button:disabled:hover {
@@ -303,6 +309,19 @@ a.button.secondary, button.secondary {
   border: 2px solid currentcolor;
   color: var(--text-color)
 }
+
+.button-container span.icon {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+}
+
+.button-container .icon img {
+  height: 10px;
+  width: 10px;
+}
+
+/* imgs and icons */
 
 main img {
   max-width: 100%;

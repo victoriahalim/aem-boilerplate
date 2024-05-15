@@ -164,13 +164,13 @@
     width: 2rem;
     height: 2rem;
     position: relative;
-    background-color: rgba(0 0 0 / 25%);
+    background-color: transparent;
     z-index: 2;
   }
   
   .carousel .carousel-navigation-buttons button:hover,
   .carousel .carousel-navigation-buttons button:focus-visible {
-    background-color: rgba(0 0 0 / 80%);
+    background-color: transparent;
     z-index: 2;
   }
   
@@ -220,7 +220,7 @@
       top: 0;
       bottom: 0;
       right: 0;
-      width: 47.5%; /* Make the overlay cover half of the container */
+      width: 42.5%; /* Make the overlay cover half of the container */
       background-color: var(--text-color);
       z-index: 1; /* Ensure overlay appears above the image */
     }

@@ -1,7 +1,7 @@
 footer {
-  padding: 2rem;
-  background-color:black;
-  font-size: var(--body-font-size-s);
+  padding-top: 100px;
+  padding-bottom: 0px;
+  background-color:var(--text-color);
   color:white;
 }
 
@@ -10,9 +10,30 @@ footer .footer {
   margin: auto;
 }
 
+footer .footer .icon-logo-footer {
+  padding-bottom: 10px;
+  width: 100px;
+  height: auto;
+}
+
 footer .footer p {
   margin: 0;
 }
+
+footer .footer a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* taken from h6 styling */
+footer .footer strong, footer .footer strong a {
+  display: inline-block;
+  font-weight: 600;
+  font-size: var(--heading-font-size-xs);
+  letter-spacing: -0.24px;
+  line-height: 24px;
+  padding-bottom: 4px;
+ }
  
  footer .footer.block{
    display:flex;
@@ -23,26 +44,32 @@ footer .footer p {
  }
 
  footer .section{
-  width:16.6667%;
+  width: 16.667%;
   box-sizing: border-box;
   float:left;
   padding-bottom: 100px;
-  padding-left:20px;
+  padding-right: 70px;
  }
 
- footer .section:last-child{
+ footer .section:last-child {
   width:100%;
-  align-items:center;
-  border-top:  1px solid white;
-  padding-top:20px;
+  align-items: center;
+  border-top:  1px solid #686a70;
+  padding: 40px 0px;
  }
 
- footer .default-content-wrapper p span{
-  padding-left:10px;
-  padding-right:10px;
-  padding-top:20px;
-  float:right;
- }
+ footer .section:last-child .default-content-wrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas: 
+    "div1 div3"
+    "div2 div3";
+}
+/*
+ footer .section:last-child .default-content-wrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+ }*/
 
 @media screen and (max-width:900px){
   footer .section{
@@ -54,4 +81,14 @@ footer .footer p {
   footer .section:first-child{
     width:100%;
   }
+}
+
+/* social media links */
+
+footer .section:last-child p:last-child{
+  grid-area: div3;
+  justify-self: end;
+  float: right;
+  display: flex;
+  gap: 12px;
 }

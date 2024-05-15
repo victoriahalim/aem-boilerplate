@@ -1,11 +1,11 @@
 import { getMetadata } from '../../scripts/aem.js';
+import { addClasses } from '../../scripts/scripts.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 function hoverEffect(socialIcons) {
   socialIcons.forEach(img => {
     const defaultImgSrc = img.getAttribute('src');
     const hoverImgSrc = defaultImgSrc.slice(0, -4) + "-hover.svg";
-    console.log(hoverImgSrc)
 
     img.addEventListener('mouseenter', () => {
         img.src = hoverImgSrc
@@ -29,6 +29,9 @@ export default async function decorate(block) {
   // social icons mouse hover effect
   const socialIcons = footer.querySelectorAll('[data-social-icons="true"] img');
   hoverEffect(socialIcons)
+
+  // add classes for styling
+  addClasses(footer, 'p, a', 'body-small');
 
   console.log(socialIcons);
 }

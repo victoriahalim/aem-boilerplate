@@ -5,8 +5,8 @@
     height:40%;
     padding-bottom:80px;
     text-decoration:none;
-    
 }
+
 .links h2{
   border-bottom: 2px solid #aabbaa;
   padding-bottom:20px;
@@ -35,7 +35,6 @@ padding-bottom:20px;
   content:">";
   align-items:center;
 }*/
-
 
 @media only screen and (max-width: 1300px) {
     .links {

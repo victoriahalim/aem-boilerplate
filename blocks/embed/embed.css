@@ -1,9 +1,8 @@
 /* General Embed Styles */
 .embed {
   width: 60%;
-  padding-left:10%;
+  padding-left:5%;
   padding-bottom:10%;
-  
   padding-top:3%;
   margin: 32px auto;
   float: right; /* Add this line to float the embed to the right */

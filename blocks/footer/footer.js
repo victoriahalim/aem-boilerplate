@@ -32,6 +32,4 @@ export default async function decorate(block) {
 
   // add classes for styling
   addClasses(footer, 'p, a', 'body-small');
-
-  console.log(socialIcons);
 }

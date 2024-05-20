@@ -19,6 +19,7 @@
   --dark-color: #ccc;
   --text-color: #181a20;
   --body-text-color: #484a50;
+  --neutral-color-5: #686a70;
   --bs-btn-bg: #208834;
   --bs-btn-hover: #0C7420;
   --bs-body-color: white;
@@ -165,12 +166,13 @@ h6 {
 }
 
 .caption {
-  font-weight: 400; 
   font-size: var(--body-font-size-xs);
+  font-weight: 400; 
   line-height: 16px;
 }
 
 .overline {
+  font-size: var(--body-font-size-xxs);
   font-weight: 700;
   color: var(--text-color);
   letter-spacing: 1px;
@@ -178,6 +180,7 @@ h6 {
 }
 
 .action {
+  font-size: var(--body-font-size-s);
   font-weight: 600;
   color: var(--text-color);
   letter-spacing: -0.12px;

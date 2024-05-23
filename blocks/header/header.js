@@ -2,6 +2,7 @@ import { fetchPlaceholders, getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 const isDesktop = window.matchMedia('(min-width: 900px)');
+const isMobile = window.matchMedia('(max-width: 899px)');
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
@@ -103,6 +104,16 @@ function toggleSearchBar(nav) {
   });
 }
 
+  // Add classes for header font styling depending on viewport
+function toggleViewportChange(event) {
+  const nav = document.querySelector('nav');
+  if (event.matches) {
+    nav.classList.add('action');
+  } else {
+    nav.classList.remove('action');
+  }
+}
+
 async function buildBreadcrumbs() {
   const breadcrumbs = document.createElement('nav');
   breadcrumbs.className = 'breadcrumbs';
@@ -146,9 +157,15 @@ export default async function decorate(block) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
   }
-
-  // Add classes for font styling
-  nav.classList.add('action');
+  
+  // Change header fonts when viewport size changes
+  // Initial
+  if (isDesktop.matches) {
+    nav.classList.add('action');
+  } else {
+    nav.classList.remove('action');
+  }
+  isDesktop.addEventListener('change', toggleViewportChange);
 
   // Initialize hidden search container
   const searchContainer = nav.querySelector('.search-container');
@@ -165,7 +182,7 @@ export default async function decorate(block) {
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
-        if(window.matchMedia("(max-width: 899px)").matches){
+        if(isMobile){
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');

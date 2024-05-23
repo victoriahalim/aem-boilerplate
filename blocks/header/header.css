@@ -1,4 +1,4 @@
-.hidden * {
+.hidden {
   display: none;
 }
 
@@ -35,16 +35,15 @@ header nav#nav[aria-expanded="true"] {
   min-height: 100vh;
 }
 
-@media (width >= 600px) {
+@media (min-width: 600px) {
   header nav#nav {
     padding: 0 2rem;
   }
 }
 
-@media (width >= 900px) {
+@media (min-width: 900px) {
   header nav#nav {
     display: flex;
-    justify-content: space-between;
   }
 
   header nav#nav[aria-expanded="true"] {
@@ -52,7 +51,6 @@ header nav#nav[aria-expanded="true"] {
     overflow: visible;
   }
 }
-
 
 /* hamburger */
 header nav#nav .nav-hamburger {
@@ -130,22 +128,18 @@ header nav#nav[aria-expanded="true"] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media(width<=900px ) 
+/* mobile dropdown */
+@media(max-width: 900px) 
 {
-  
   header nav#nav .nav-sections  .nav-drop{
-    border-bottom: 2px solid  hsl(0, 0%, 83%);
-    padding-bottom: 4px;
-    position: relative;
-    padding-right: 16px;
     cursor: pointer;
-
   }
-  header nav#nav .nav-sections  .nav-drop::after{
+
+  /* dropdown pointer icon */
+  header nav#nav .nav-sections .nav-drop::before{
     content: '';
     display: inline-block;
     position: absolute;
-    top: .5em;
     right: 2px;
     transform: rotate(135deg);
     width: 6px;
@@ -153,59 +147,69 @@ header nav#nav[aria-expanded="true"] .nav-hamburger-icon::after {
     border: 2px solid currentcolor;
     border-radius: 0 1px 0 0;
     border-width: 2px 2px 0 0;
-}
-header nav#nav .nav-sections  .nav-drop[aria-expanded="true"]::after {
-    top: unset;
-    bottom: .5em;
-    transform: rotate(315deg);
-    
-}
-header nav .nav-sections ul {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
+  }
+
+  header nav#nav .nav-sections .nav-drop[aria-expanded="true"]::before {
+      transform: rotate(315deg);
+  }
+
+  header nav .nav-sections ul {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li {
+    flex: 0 1 auto;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
+    margin-top: 20px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+    display: none;
+    position: relative;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded="true"] > ul {
+    display: block;
+    position: relative;
+    left: 1em;
+    width: 100%;
+    background-color: white;
+    white-space: initial;
+  }
+
+  /* Typography */
+  /* Link lv 1 */
+  header nav .nav-sections .default-content-wrapper > ul > li {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.12px;
+  }
+
+  /* Link lv 2 */
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.12px;
+    line-height: 20px;
+  }
+
+  /* Link lv 3 */
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > ul > li {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.24px;
+    line-height: 20px;
+  }
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li {
-  flex: 0 1 auto;
-  position: relative;
-  margin-bottom: 10px;
-}
-
-header nav .nav-sections .default-content-wrapper > ul > li > ul {
-  display: none;
-  position: relative;
-}
-
-header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded="true"] > ul {
-  display: block;
-  position: relative;
-  left: 1em;
-  width: 100%;
-  margin-top: 12px;
-  padding: 1em;
-  background-color: white;
-  white-space: initial;
-}
-header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 8px;
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid var(--light-color);
-  
-}
-
-header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-  padding: 8px 0;
-}
-
-}
-@media (width >= 900px) {
+@media (min-width: 900px) {
   header nav#nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -247,14 +251,14 @@ header nav#nav .nav-sections ul {
   padding-left: 0;
 }
 
-/* dropdown */
-header nav#nav .nav-sections ul > li > ul {
-  margin-top: 0;
-  border-radius: 4px;
-  box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.32); /* x-offset, y-offset, blur-radius, spread-radius, color */
-}
+@media (min-width: 900px) {
+  /* dropdown */
+  header nav#nav .nav-sections ul > li > ul {
+    margin-top: 0;
+    border-radius: 4px;
+    box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.32); /* x-offset, y-offset, blur-radius, spread-radius, color */
+  }
 
-@media (width >= 900px) {
   header nav#nav .nav-sections {
     display: block;
     visibility: visible;

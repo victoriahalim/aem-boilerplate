@@ -37,6 +37,7 @@ export default function createAllSlides(
 
   let slideIndicatorsNav;
   let slideIndicators;
+
   if (hasSlideIndicators) {
     // check if carousel of this id has inner indicators
     hasInnerIndicators = document.querySelector(`#carousel-${carouselId}.carousel-inner-indicators`);
@@ -57,29 +58,46 @@ export default function createAllSlides(
   }
 
   // placing indicators for each slide
-  rows.forEach((row, idx) => {
-    // add carousel-slide-content
-    let slide;
-    if (hasInnerIndicators) {
-      const currSlideIndicatorsNav = slideIndicatorsNav.cloneNode(true);
-      slide = createSlide(row, idx, carouselId, currSlideIndicatorsNav);
-    } else {
-      slide = createSlide(row, idx, carouselId);
-    }
+  if (!hasInnerIndicators) {
+    rows.forEach((row, idx) => {
+      // add carousel-slide-content
+      const slide = createSlide(row, idx, carouselId);
 
-    slidesWrapper.append(slide);
+      slidesWrapper.append(slide);
 
-    if (hasSlideIndicators) {
-      // create list element for curr slide
+      if (hasSlideIndicators && !hasInnerIndicators) {
+        const indicator = document.createElement('li');
+        indicator.classList.add('carousel-slide-indicator');
+        indicator.dataset.targetSlide = idx;
+        indicator.innerHTML = `<button type="button"><span>${placeholders.showSlide || 'Show Slide'} ${idx + 1} ${placeholders.of || 'of'} ${rows.length}</span></button>`;
+        slideIndicators.append(indicator);
+
+        row.remove();
+      }
+    });
+  }
+
+  if (hasInnerIndicators) {
+    // make slide indicators according to the number of slides available
+
+    // make the indicators first
+    for (let idx = 0; idx < rows.length; idx += 1) {
       const indicator = document.createElement('li');
       indicator.classList.add('carousel-slide-indicator');
       indicator.dataset.targetSlide = idx;
-      //
       indicator.innerHTML = `<button type="button"><span>${placeholders.showSlide || 'Show Slide'} ${idx + 1} ${placeholders.of || 'of'} ${rows.length}</span></button>`;
       slideIndicators.append(indicator);
     }
-    row.remove();
-  });
+
+    // add them to each slide
+    rows.forEach((row, idx) => {
+      // add carousel-slide-content
+      const slide = createSlide(row, idx, carouselId, slideIndicatorsNav.cloneNode(true));
+      slidesWrapper.append(slide);
+
+      row.remove();
+    });
+  }
 }
 
 /* create a slide
@@ -96,6 +114,9 @@ SO FAR
     <content>
     <slides-indicator-nav>
       <ol slides-indicators>
+       1
+       2
+       3
     <slides-indicator-nav>
   <slide>
 <SlidesWrapper>

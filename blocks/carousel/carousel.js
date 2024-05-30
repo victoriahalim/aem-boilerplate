@@ -2,7 +2,7 @@ import { fetchPlaceholders } from '../../scripts/aem.js';
 import carouselSlideButtons from './carouselSlideButtons.js';
 import createAllSlides from './carouselSlides.js';
 
-function updateActiveSlide(slide) {
+function updateActiveSlide(slide, hasInnerIndicators) {
   const block = slide.closest('.carousel');
   const slideIndex = parseInt(slide.dataset.slideIndex, 10);
   block.dataset.activeSlide = slideIndex;
@@ -30,7 +30,15 @@ function updateActiveSlide(slide) {
     }
   });
 
-  const indicators = block.querySelectorAll('.carousel-slide-indicator');
+  let indicators;
+  if (hasInnerIndicators) {
+    indicators = slide.querySelectorAll('.carousel-slide-indicator');
+    console.log(indicators);
+  } else {
+    console.log("THE NON ONE");
+    indicators = block.querySelectorAll('.carousel-slide-indicator');
+  }
+  // in the CURRENT SLIDE
   indicators.forEach((indicator, idx) => {
     if (idx !== slideIndex) {
       indicator.querySelector('button').removeAttribute('disabled');
@@ -54,7 +62,7 @@ function showSlide(block, slideIndex = 0) {
 }
 
 /* Slide click functionality */
-function bindEvents(block) {
+function bindEvents(block, hasInnerIndicators) {
   const slideIndicators = block.querySelector('.carousel-slide-indicators');
   if (!slideIndicators) return;
   slideIndicators.querySelectorAll('button').forEach((button) => {
@@ -71,7 +79,7 @@ function bindEvents(block) {
   });
   const slideObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) updateActiveSlide(entry.target);
+      if (entry.isIntersecting) updateActiveSlide(entry.target, hasInnerIndicators);
     });
   }, { threshold: 0.5 });
   block.querySelectorAll('.carousel-slide').forEach((slide) => {
@@ -85,6 +93,8 @@ export default async function decorate(block) {
   block.setAttribute('id', `carousel-${carouselId}`);
   const rows = block.querySelectorAll(':scope > div');
   const isSingleSlide = rows.length < 2;
+  const hasInnerIndicators = document.querySelector(`#carousel-${carouselId}.carousel-inner-indicators`);
+
   const placeholders = await fetchPlaceholders();
   block.setAttribute('role', 'region');
   block.setAttribute('aria-roledescription', placeholders.carousel || 'Carousel');
@@ -108,7 +118,7 @@ export default async function decorate(block) {
   container.append(slidesWrapper);
   block.prepend(container);
   if (!isSingleSlide) {
-    bindEvents(block);
+    bindEvents(block, hasInnerIndicators);
   }
 
   // Add classes for styling

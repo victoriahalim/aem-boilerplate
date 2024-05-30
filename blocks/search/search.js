@@ -215,6 +215,18 @@ function searchResultsContainer(block) {
   return results;
 }
 
+function quitIcon() {
+  const icon = document.createElement('span');
+  icon.classList.add('icon', 'icon-cross');
+  return icon;
+}
+
+function searchIcon() {
+  const icon = document.createElement('span');
+  icon.classList.add('icon', 'icon-search');
+  return icon;
+}
+
 function searchInput(block, config) {
   const input = document.createElement('input');
   input.setAttribute('type', 'search');
@@ -230,21 +242,19 @@ function searchInput(block, config) {
 
   input.addEventListener('keyup', (e) => { if (e.code === 'Escape') { clearSearch(block); } });
 
-  return input;
-}
+  const inputContainer = document.createElement('div');
+  inputContainer.classList.add('search-input-container');
+  inputContainer.append(input, searchIcon());
 
-function searchIcon() {
-  const icon = document.createElement('span');
-  icon.classList.add('icon', 'icon-search');
-  return icon;
+  return inputContainer;
 }
 
 function searchBox(block, config) {
   const box = document.createElement('div');
   box.classList.add('search-box');
   box.append(
-    searchIcon(),
     searchInput(block, config),
+    quitIcon(),
   );
 
   return box;

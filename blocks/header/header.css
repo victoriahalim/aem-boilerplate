@@ -183,6 +183,15 @@ header nav#nav[aria-expanded="true"] .nav-hamburger-icon::after {
     white-space: initial;
   }
 
+  /* Active link styling */
+  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded="true"] {
+    color: var(--link-hover-color);
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded="true"] > ul {
+    color: var(--text-color);
+  }
+
   /* Typography */
   /* Link lv 1 */
   header nav .nav-sections .default-content-wrapper > ul > li {

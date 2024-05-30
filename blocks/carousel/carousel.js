@@ -1,4 +1,6 @@
 import { fetchPlaceholders } from '../../scripts/aem.js';
+import carouselSlideButtons from './carouselSlideButtons.js';
+import createAllSlides from './carouselSlides.js';
 
 function updateActiveSlide(slide) {
   const block = slide.closest('.carousel');
@@ -15,17 +17,19 @@ function updateActiveSlide(slide) {
       }
     });
   });
+
   const carouselSlideContents = document.querySelectorAll('.carousel-slide-content');
-    carouselSlideContents.forEach(content => {
-      const hasContent = content.textContent.trim().length > 0 || content.children.length > 0;
-      if (!hasContent) {
-        content.classList.add('empty');
-        const imageContainer = content.nextElementSibling;
-        if (imageContainer.classList.contains('carousel-slide-image')) {
-            imageContainer.classList.add('empty'); // Add empty class to the image container
-        }
+  carouselSlideContents.forEach((content) => {
+    const hasContent = content.textContent.trim().length > 0 || content.children.length > 0;
+    if (!hasContent) {
+      content.classList.add('empty');
+      const imageContainer = content.nextElementSibling;
+      if (imageContainer.classList.contains('carousel-slide-image')) {
+        imageContainer.classList.add('empty'); // Add empty class to the image container
       }
-    });
+    }
+  });
+
   const indicators = block.querySelectorAll('.carousel-slide-indicator');
   indicators.forEach((indicator, idx) => {
     if (idx !== slideIndex) {
@@ -49,6 +53,7 @@ function showSlide(block, slideIndex = 0) {
   });
 }
 
+/* Slide click functionality */
 function bindEvents(block) {
   const slideIndicators = block.querySelector('.carousel-slide-indicators');
   if (!slideIndicators) return;
@@ -74,21 +79,6 @@ function bindEvents(block) {
   });
 }
 
-function createSlide(row, slideIndex, carouselId) {
-  const slide = document.createElement('li');
-  slide.dataset.slideIndex = slideIndex;
-  slide.setAttribute('id', `carousel-${carouselId}-slide-${slideIndex}`);
-  slide.classList.add('carousel-slide');
-  row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
-    column.classList.add(`carousel-slide-${colIdx === 0 ? 'image' : 'content'}`);
-    slide.append(column);
-  });
-  const labeledBy = slide.querySelector('h1, h2, h3, h4, h5, h6');
-  if (labeledBy) {
-    slide.setAttribute('aria-labelledby', labeledBy.getAttribute('id'));
-  }
-  return slide;
-}
 let carouselId = 0;
 export default async function decorate(block) {
   carouselId += 1;
@@ -98,38 +88,23 @@ export default async function decorate(block) {
   const placeholders = await fetchPlaceholders();
   block.setAttribute('role', 'region');
   block.setAttribute('aria-roledescription', placeholders.carousel || 'Carousel');
+
   const container = document.createElement('div');
   container.classList.add('carousel-slides-container');
+
   const slidesWrapper = document.createElement('ul');
-  slidesWrapper.classList.add('carousel-slides');
+  slidesWrapper.classList.add('carousel-slides'); // create ul but not yet slide content
   block.prepend(slidesWrapper);
-  let slideIndicators;
+
+  // Carousel buttons
   if (!isSingleSlide) {
-    const slideIndicatorsNav = document.createElement('nav');
-    slideIndicatorsNav.setAttribute('aria-label', placeholders.carouselSlideControls || 'Carousel Slide Controls');
-    slideIndicators = document.createElement('ol');
-    slideIndicators.classList.add('carousel-slide-indicators');
-    slideIndicatorsNav.append(slideIndicators);
-    block.append(slideIndicatorsNav);
-    const slideNavButtons = document.createElement('div');
-    slideNavButtons.classList.add('carousel-navigation-buttons');
-    slideNavButtons.innerHTML = `
-      <button type="button" class= "slide-prev" aria-label="${placeholders.previousSlide || 'Previous Slide'}"></button>
-      <button type="button" class="slide-next" aria-label="${placeholders.nextSlide || 'Next Slide'}"></button>`;
+    const slideNavButtons = carouselSlideButtons(placeholders);
     container.append(slideNavButtons);
   }
-  rows.forEach((row, idx) => {
-    const slide = createSlide(row, idx, carouselId);
-    slidesWrapper.append(slide);
-    if (slideIndicators) {
-      const indicator = document.createElement('li');
-      indicator.classList.add('carousel-slide-indicator');
-      indicator.dataset.targetSlide = idx;
-      indicator.innerHTML = `<button type="button"><span>${placeholders.showSlide || 'Show Slide'} ${idx + 1} ${placeholders.of || 'of'} ${rows.length}</span></button>`;
-      slideIndicators.append(indicator);
-    }
-    row.remove();
-  });
+
+  // Add all slides to slidesWrapper ul as list elements + indicators
+  createAllSlides(carouselId, block, rows, slidesWrapper, isSingleSlide, placeholders);
+
   container.append(slidesWrapper);
   block.prepend(container);
   if (!isSingleSlide) {
@@ -137,8 +112,8 @@ export default async function decorate(block) {
   }
 
   // Add classes for styling
-  const slideContents = document.querySelectorAll(".carousel-slide-content");
+  const slideContents = document.querySelectorAll('.carousel-slide-content');
   slideContents.forEach((slide) => {
-    slide.firstElementChild.classList.add("overline");
+    slide.firstElementChild.classList.add('overline');
   });
 }

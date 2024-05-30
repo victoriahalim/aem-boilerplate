@@ -99,12 +99,12 @@ async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
 
 function toggleSearchBar(nav) {
   const sections = nav.querySelectorAll('.section');
-  sections.forEach(section => {
+  sections.forEach((section) => {
     section.classList.toggle('hidden');
   });
 }
 
-  // Add classes for header font styling depending on viewport
+// Add classes for header font styling depending on viewport
 function toggleViewportChange(event) {
   const nav = document.querySelector('nav');
   if (event.matches) {
@@ -145,6 +145,8 @@ export default async function decorate(block) {
   const fragment = await loadFragment(navPath);
   const nav = document.createElement('nav');
   nav.id = 'nav';
+
+  /* Initialize nav sections */
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
   const classes = ['brand', 'sections', 'tools'];
   classes.forEach((c, i) => {
@@ -157,9 +159,8 @@ export default async function decorate(block) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
   }
-  
-  // Change header fonts when viewport size changes
-  // Initial
+
+  // Change header fonts when viewport size changes ( TODO: switch this to css code)
   if (isDesktop.matches) {
     nav.classList.add('action');
   } else {
@@ -167,7 +168,7 @@ export default async function decorate(block) {
   }
   isDesktop.addEventListener('change', toggleViewportChange);
 
-  // Initialize hidden search container
+  // Initialize search container
   const searchContainer = nav.querySelector('.search-container');
   searchContainer.classList.add('hidden');
 
@@ -182,7 +183,7 @@ export default async function decorate(block) {
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
-        if(isMobile){
+        if (isMobile) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
@@ -191,19 +192,6 @@ export default async function decorate(block) {
     });
   }
 
-  // Nav section lists
-  /*function wrapTextWithSpan(listItem) {
-    var text = listItem.textContent;
-    console.log(text);
-    var span = document.createElement('span');
-    span.textContent = text;
-    listItem.textContent = '';
-    listItem.appendChild(span);
-  }
-  
-  const navSectionList = navSections.querySelectorAll('.nav-drop');
-  navSectionList.forEach(wrapTextWithSpan); */  
-
   // Hamburger
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
@@ -211,7 +199,7 @@ export default async function decorate(block) {
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
+  nav.prepend(hamburger); // add hamburger before
   nav.setAttribute('aria-expanded', 'false');
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));

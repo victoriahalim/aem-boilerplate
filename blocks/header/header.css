@@ -1,5 +1,6 @@
 .hidden {
-  display: none;
+  display: none !important;
+  visibility: hidden !important; 
 }
 
 /* SECTION: LAYOUT */
@@ -407,4 +408,9 @@ header .breadcrumbs ol li:last-of-type {
   header .breadcrumbs {
     display: block;
   }
+}
+
+/* Search bar */
+header .search-container {
+  width: 100%;
 }

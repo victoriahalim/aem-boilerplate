@@ -10,15 +10,7 @@
   outline: none;
   width: 100%;
   font: inherit;
-}
-
-.search .search-box input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.search .search-box .search-input input:focus {
-  border-color: green;
+  color: #686A70;
 }
 
 .search .search-input-container {
@@ -28,9 +20,29 @@
   display: flex;
 }
 
+.search .search-input-container:focus-within {
+  border-color: #208834;
+}
+
+.search .icon-cross {
+  border: 1px solid var(--dark-color);
+  padding: 6px 8px;
+}
+
+.search .icon-cross:hover {
+  border-color: #208834;
+}
+
+.search .search-box input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 /* search results */
+/* TODO: toggle display and visibility when there are search results */
 .search ul.search-results {
-  display: grid;
+  display: none;
+  visibility: hidden;
   grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
   gap: 16px;
   padding-left: 0;

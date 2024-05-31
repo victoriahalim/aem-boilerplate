@@ -218,6 +218,7 @@ function searchResultsContainer(block) {
 function quitIcon() {
   const icon = document.createElement('span');
   icon.classList.add('icon', 'icon-cross');
+
   return icon;
 }
 
@@ -270,13 +271,15 @@ export default async function decorate(block) {
   );
 
   // search results container shouldn't be displayed initially
-  const searchResults = block.querySelector('.search-results');
+  // const searchResults = block.querySelector('.search-results');
 
   if (searchParams.get('q')) {
     const input = block.querySelector('input');
     input.value = searchParams.get('q');
     input.dispatchEvent(new Event('input'));
   }
+
+  // searchBox.addEventListener('focus', handleInputFocus);
 
   decorateIcons(block);
 }

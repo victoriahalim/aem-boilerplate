@@ -45,6 +45,7 @@ export default function createAllSlides(
     // make slide indicators
     slideIndicatorsNav = document.createElement('nav');
     slideIndicatorsNav.setAttribute('aria-label', placeholders.carouselSlideControls || 'Carousel Slide Controls');
+    slideIndicatorsNav.classList.add('carousel-slide-indicators-container');
 
     slideIndicators = document.createElement('ol');
     slideIndicators.classList.add('carousel-slide-indicators');

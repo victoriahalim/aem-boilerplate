@@ -33,9 +33,7 @@ function updateActiveSlide(slide, hasInnerIndicators) {
   let indicators;
   if (hasInnerIndicators) {
     indicators = slide.querySelectorAll('.carousel-slide-indicator');
-    console.log(indicators);
   } else {
-    console.log("THE NON ONE");
     indicators = block.querySelectorAll('.carousel-slide-indicator');
   }
   // in the CURRENT SLIDE

@@ -1,6 +1,9 @@
 import { fetchPlaceholders, getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
+const MOBILE_BREAKPOINT = 600;
+const DESKTOP_BREAKPOINT = 600;
+
 const isDesktop = window.matchMedia('(min-width: 900px)');
 const isMobile = window.matchMedia('(max-width: 899px)');
 
@@ -146,7 +149,7 @@ export default async function decorate(block) {
   const nav = document.createElement('nav');
   nav.id = 'nav';
 
-  /* Initialize nav sections */
+  // Initialize nav sections */
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
   const classes = ['brand', 'sections', 'tools'];
   classes.forEach((c, i) => {
@@ -206,7 +209,9 @@ export default async function decorate(block) {
 
   // Search bar functionality
   const searchIcon = nav.querySelector('.nav-tools .icon-search');
-  searchIcon.addEventListener('click', () => toggleSearchBar(nav, searchContainer));
+  searchIcon.addEventListener('click', () => toggleSearchBar(nav));
+  const closeIcon = searchContainer.querySelector('.icon-cross');
+  closeIcon.addEventListener('click', () => toggleSearchBar(nav));
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';

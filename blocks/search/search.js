@@ -215,7 +215,7 @@ function searchResultsContainer(block) {
   return results;
 }
 
-function quitIcon() {
+function closeIcon() {
   const icon = document.createElement('span');
   icon.classList.add('icon', 'icon-cross');
 
@@ -250,12 +250,12 @@ function searchInput(block, config) {
   return inputContainer;
 }
 
-function searchBox(block, config) {
+function searchBoxComponent(block, config) {
   const box = document.createElement('div');
   box.classList.add('search-box');
   box.append(
     searchInput(block, config),
-    quitIcon(),
+    closeIcon(),
   );
 
   return box;
@@ -265,8 +265,9 @@ export default async function decorate(block) {
   const placeholders = await fetchPlaceholders();
   const source = block.querySelector('a[href]') ? block.querySelector('a[href]').href : '/query-index.json';
   block.innerHTML = '';
+  const searchBox = searchBoxComponent(block, { source, placeholders });
   block.append(
-    searchBox(block, { source, placeholders }),
+    searchBox,
     searchResultsContainer(block),
   );
 
@@ -279,7 +280,7 @@ export default async function decorate(block) {
     input.dispatchEvent(new Event('input'));
   }
 
-  // searchBox.addEventListener('focus', handleInputFocus);
+  // searchBox.addEventListener('click', handleInputFocus);
 
   decorateIcons(block);
 }
